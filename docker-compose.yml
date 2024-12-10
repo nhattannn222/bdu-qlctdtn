@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"       # Laravel sẽ chạy trên cổng 8000
+    volumes:
+      - .:/var/www/html
+    environment:
+      - DB_HOST=host.docker.internal   # Kết nối MySQL từ máy thật
+      - DB_DATABASE=bdu_qlctdtn
+      - DB_USERNAME=root
+      - DB_PASSWORD=nhattan123
+    networks:
+      - laravel-net
+
+networks:
+  laravel-net:
+    driver: bridge
